@@ -27,7 +27,7 @@ class SmsReceiver : BroadcastReceiver(), CoroutineScope {
   }
 
   private suspend fun parseMessage(context: Context, intent: Intent) {
-    val smsCodeProviders = context.app.database.smsCodeProviderDao().fetchAllAsync()
+    val smsCodeProviders = context.app.database.smsCodeProviderQueries.fetchAll().executeAsList()
     Telephony.Sms.Intents.getMessagesFromIntent(intent).forEach { smsMessage ->
       smsCodeProviders.firstOrNull { it.sender == smsMessage.displayOriginatingAddress }?.let {
 

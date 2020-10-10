@@ -1,0 +1,20 @@
+CREATE TABLE SmsCodeProvider(
+  sender TEXT PRIMARY KEY NOT NULL,
+  codeLength INTEGER AS Int NOT NULL
+);
+
+insert:
+INSERT INTO SmsCodeProvider
+VALUES ?;
+
+upsert:
+INSERT OR REPLACE INTO SmsCodeProvider
+VALUES ?;
+
+fetchAll:
+SELECT * FROM SmsCodeProvider
+ORDER BY sender ASC;
+
+delete:
+DELETE FROM SmsCodeProvider
+WHERE sender = ?;

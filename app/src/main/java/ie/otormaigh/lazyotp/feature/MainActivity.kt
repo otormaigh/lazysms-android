@@ -12,6 +12,8 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.squareup.sqldelight.runtime.coroutines.asFlow
+import com.squareup.sqldelight.runtime.coroutines.mapToList
 import ie.otormaigh.lazyotp.R
 import ie.otormaigh.lazyotp.app
 import ie.otormaigh.lazyotp.feature.addprovider.AddSmsProviderState
@@ -23,6 +25,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.forEach
+import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class MainActivity : AppCompatActivity(), CoroutineScope {
@@ -83,9 +88,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
       false
     }
 
-    app.database.smsCodeProviderDao().fetchAllLive().observe(this, Observer { data ->
-      recyclerAdapter.submitList(data)
-    })
+    launch {
+      app.database.smsCodeProviderQueries.fetchAll().asFlow().mapToList().collect { data ->
+        recyclerAdapter.submitList(data)
+      }
+    }
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) requestPermissions(
       arrayOf(Manifest.permission.RECEIVE_SMS), 13

@@ -2,7 +2,7 @@ package ie.otormaigh.lazyotp
 
 import android.app.Application
 import android.content.Context
-import androidx.room.Room
+import com.squareup.sqldelight.android.AndroidSqliteDriver
 import ie.otormaigh.lazyotp.data.LazySmsDatabase
 import ie.otormaigh.lazyotp.service.BatteryLevelService
 import ie.otormaigh.lazyotp.toolbox.batteryWarningEnabled
@@ -11,10 +11,7 @@ import timber.log.Timber
 
 class LazySmsApplication : Application() {
   val database by lazy {
-    Room.databaseBuilder(applicationContext, LazySmsDatabase::class.java, "lazy-sms.db")
-      .allowMainThreadQueries()
-      .apply { if (BuildConfig.DEBUG) fallbackToDestructiveMigration() }
-      .build()
+    LazySmsDatabase(AndroidSqliteDriver(LazySmsDatabase.Schema, this, "lazy-sms.db"))
   }
 
   override fun onCreate() {
