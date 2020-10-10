@@ -1,5 +1,4 @@
 import ie.otormaigh.lazyotp.plugin.SemVer
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -91,7 +90,6 @@ dependencies {
   implementation deps.square.okhttp.core
   implementation deps.square.okhttp.logging
 
-  implementation deps.square.sqldelight.android
   implementation deps.square.sqldelight.coroutines
 
   implementation deps.timber

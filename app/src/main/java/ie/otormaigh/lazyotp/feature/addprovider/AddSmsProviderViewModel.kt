@@ -26,6 +26,7 @@ class AddSmsProviderViewModel(private val database: LazySmsDatabase) : BaseViewM
     if (validateInput(sender, digitCount)) {
       launch {
 //        database.smsCodeProviderQueries.upsert(providerId, SmsCodeProvider(sender.toString(), digitCount.toString().toInt()))
+        database.smsCodeProviderQueries.delete(providerId)
         database.smsCodeProviderQueries.upsert(SmsCodeProvider(sender.toString(), digitCount.toString().toInt()))
         _stateMachine.postValue(AddSmsProviderState.Success)
       }

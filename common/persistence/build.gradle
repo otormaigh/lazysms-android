@@ -1,15 +1,46 @@
 plugins {
-  id 'java-library'
-  id 'kotlin'
+  id 'org.jetbrains.kotlin.multiplatform'
   id 'com.squareup.sqldelight'
+}
+apply plugin: 'com.android.library'
+
+android {
+  compileSdkVersion versions.compileSdk
+
+  defaultConfig {
+    minSdkVersion versions.minSdk
+    targetSdkVersion versions.targetSdk
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
+
+kotlin {
+  android('android')
+
+  sourceSets {
+    commonMain {
+      dependencies {
+        implementation deps.square.sqldelight.runtime
+        implementation deps.kotlin.stdlib_common
+      }
+    }
+
+    androidMain {
+      dependencies {
+        api deps.square.sqldelight.android
+        implementation deps.kotlin.stdlib
+      }
+    }
+  }
 }
 
 java {
   sourceCompatibility = JavaVersion.VERSION_1_8
   targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-dependencies {
 }
 
 sqldelight {
