@@ -24,9 +24,9 @@ ext {
     ],
     junit   : 'junit:junit:4.13',
     kotlin  : [
-      stdlib   : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}",
-      stdlib_common   : "org.jetbrains.kotlin:kotlin-stdlib-common:${versions.kotlin}",
-      coroutine: [
+      stdlib       : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}",
+      stdlib_common: "org.jetbrains.kotlin:kotlin-stdlib-common:${versions.kotlin}",
+      coroutine    : [
         core   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutine}",
         android: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutine}"
       ]
@@ -41,9 +41,10 @@ ext {
         core: "com.squareup.retrofit2:retrofit:${versions.retrofit}",
       ],
       sqldelight: [
-        android   : "com.squareup.sqldelight:android-driver:${versions.sqldelight}",
-        coroutines: "com.squareup.sqldelight:coroutines-extensions:${versions.sqldelight}",
-        runtime   : "com.squareup.sqldelight:runtime:${versions.sqldelight}"
+        driver_android: "com.squareup.sqldelight:android-driver:${versions.sqldelight}",
+        driver_native : "com.squareup.sqldelight:native-driver:${versions.sqldelight}",
+        coroutines    : "com.squareup.sqldelight:coroutines-extensions:${versions.sqldelight}",
+        runtime       : "com.squareup.sqldelight:runtime:${versions.sqldelight}"
       ]
     ],
     timber  : 'com.jakewharton.timber:timber:4.7.1'
