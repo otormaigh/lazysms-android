@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "ie.otormaigh.lazyotp",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 3002,
+      "versionName": "0.3.2-d1a5c08",
+      "outputFile": "lazyotp-0.3.2-d1a5c08-release.apk"
+    }
+  ],
+  "elementType": "File"
+}
